@@ -33,4 +33,24 @@ public class User {
 
         System.out.printf("New user %s, %s with ID %s created. \n", lastName, firstName, this.uuid);
     }
+
+    public void addAccount(Account anAcct){
+        this.accounts.add(anAcct);
+    }
+    public String getUUID(){
+        return this.uuid;
+    }
+    public boolean validatePin(String aPin){
+
+        try {
+            MessageDigest md = MessageDigest.getInstance("MD5");
+            return  MessageDigest.isEqual(md.digest(aPin.getBytes()),
+                    this.pinHash);
+        } catch (NoSuchAlgorithmException e) {
+            System.err.println("error, caught NoSuchAlgorithmException");
+            e.printStackTrace();
+            System.exit(1);
+        }
+        return false;
+    }
 }
