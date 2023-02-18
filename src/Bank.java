@@ -37,8 +37,11 @@ public class Bank {
     }
 
     public String getNewAccountUUID(){
+        return getNewUserUUID();
+    }
 
-        return null;
+    public String getName(){
+        return this.name = name;
     }
 
     public void addAccount(Account anAcct){
