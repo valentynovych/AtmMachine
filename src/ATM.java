@@ -52,12 +52,12 @@ public class ATM {
         do {
             System.out.printf("Welcome %s, what would you like to do?\n", theUser.getFirstName());
             System.out.println(" 1) Show account transaction history");
-            System.out.println(" 2) Withdrawal");
+            System.out.println(" 2) Withdraw");
             System.out.println(" 3) Deposit");
             System.out.println(" 4) Transfer");
             System.out.println(" 5) Quit");
-            System.out.println("");
-            System.out.println("Enter choice");
+            System.out.println(" ");
+            System.out.print("Enter choice: ");
             choice = scanner.nextInt();
 
             if (choice < 1 || choice > 5){
@@ -110,6 +110,7 @@ public class ATM {
         double amount;
         double acctBal;
         String  memo;
+        String line;
 
         // get the account to transfer from
         do {
@@ -125,7 +126,8 @@ public class ATM {
         // get the account to transfer to
         do {
             System.out.printf("Enter the amount to withdraw (max $%.02f): $", acctBal);
-            amount = scanner.nextDouble();
+            line = scanner.next();
+            amount = Double.parseDouble(line);
             if (amount < 0) {
                 System.out.println("Amount must be greater than zero. ");
             } else if (amount > acctBal) {
@@ -136,7 +138,7 @@ public class ATM {
 
         scanner.nextLine();
 
-        System.out.println("Enter a memo");
+        System.out.print("Enter a memo: ");
         memo = scanner.nextLine();
 
         theUser.addAcctTransaction(fromAcct, -1*amount, memo);
@@ -146,9 +148,10 @@ public class ATM {
 
     public static void depositFunds(User theUser, Scanner scanner){
         int toAcct;
-        double amount;
+        double amountDep;
         double acctBal;
         String  memo;
+        String line;
 
         // get the account to transfer from
         do {
@@ -163,19 +166,21 @@ public class ATM {
 
         // get the account to transfer to
         do {
-            System.out.printf("Enter the amount to transfer (max $%.02f): $", acctBal);
-            amount = scanner.nextDouble();
-            if (amount < 0) {
+            System.out.printf("Enter the amountDep to transfer (max $%.02f): $", acctBal);
+            line = scanner.next();
+            amountDep = Double.parseDouble(line);
+            //amountDep = scanner.nextDouble();
+            if (amountDep < 0) {
                 System.out.println("Amount must be greater than zero. ");
             }
-        } while (amount < 0);
+        } while (amountDep < 0);
 
         scanner.nextLine();
 
-        System.out.println("Enter a memo");
+        System.out.print("Enter a memo: ");
         memo = scanner.nextLine();
 
-        theUser.addAcctTransaction(toAcct, amount, memo);
+        theUser.addAcctTransaction(toAcct, amountDep, memo);
 
     }
 
@@ -185,6 +190,7 @@ public class ATM {
         int toAcct;
         double amount;
         double acctBal;
+        String line;
 
         // get the account to transfer from
         do {
@@ -209,7 +215,8 @@ public class ATM {
 
         do {
             System.out.printf("Enter the amount to transfer (max $%.02f): $", acctBal);
-            amount = scanner.nextDouble();
+            line = scanner.next();
+            amount = Double.parseDouble(line);
             if (amount < 0) {
                 System.out.println("Amount must be greater than zero. ");
             } else if (amount > acctBal) {
